@@ -1,0 +1,20 @@
+<md-toolbar class="demo-toolbar md-default-theme md-whiteframe-z2">
+<md-button ng-model="clicked" ng-init="clicked=false" ng-click="clicked=!clicked">
+<div class="md-toolbar-tools md-toolbar-tools-extra">
+	<div class="label label-default label-default-extra md-whiteframe-z2">XML
+		ENTERED</div>
+	<md-button class="md-button md-default-theme" tabindex="0"
+		style="min-width: 72px; margin-left: auto; color:#000"> <md-icon
+		md-svg-src="libraries/images/ic_visibility_24px.svg"
+		class="ng-isolate-scope md-default-theme" aria-hidden="true">
+	</md-icon> <strong>XML Details</strong> </md-button>
+</div>
+</md-button>
+ </md-toolbar>
+ <div ng-show="clicked" class="show-hide">
+	 &lt;ExFORM RUL_Document_Key=""&gt;<br/>
+	 	&#09;&lt;ExFORM_Data&gt;<br/>
+			<div ng-repeat="fieldEntry in filedEntries">&#09;&#09;&lt;{{fieldEntry.fieldName}}&gt;{{fieldEntry.sampleValue | textOrNumber}}&lt;/{{fieldEntry.fieldName }}&gt;<br/></div>
+		&#09;&lt;/ExFORM_Data&gt;<br/>
+	&lt;/ExFORM&gt;
+	</div>

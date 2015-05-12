@@ -1,0 +1,21 @@
+<div class="row form-inline">
+	<div class="input-group col-sm-5">
+		<span class="input-group-addon" id="basic-addon1">Select Tag</span> <select
+			class="form-control" ng-model="selectedOpt">
+			<option ng-repeat="preDefTags in preDefTags" id="{{preDefTags.name}}">
+				{{preDefTags.name}}
+				</options>
+		</select>
+	</div>
+	<span ng-show="selectedOpt.length > 12">
+		<div class="input-group col-sm-6">
+			<span class="input-group-addon" id="basic-addon1">Add Sample
+				Value</span> <input ng-model="
+			sampleValue" placeholder="sample data for the tag ''{{selectedOpt.trim()}}''" class="form-control" />
+
+		</div>
+		<button ng-click="addTag(selectedOpt,sampleValue)" ng-show="sampleValue.length>0"
+			class="btn btn-success">add tag</button>
+	</span>
+</div>
+<hr />

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>XML Entry Creator</title>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="libraries/js/json3.min.js"></script>
+	<script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+        </script>
+<![endif]-->
+
+
+<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="libraries/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="libraries/css/xeditable.css">
+
+<link rel="stylesheet" href="libraries/css/angular-material.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+<link rel="stylesheet" href="mystyle.css">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body id="ng-app" ng-app="XmlentryCreator" class="container">
+	<div ng-controller="MyAppController">
+
+		<md-toolbar layout="row" style="background-color:rgb(227,43,43)">
+		<button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn">
+			<span class="visually-hidden">Menu</span>
+			<md-icon md-svg-icon="libraries/images/menu.svg"></md-icon>
+		</button>
+		<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2 "
+			md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+
+		<md-toolbar class="md-whiteframe-glow-z2"
+			style="background-color:rgb(227,43,43);font-size:1em;">
+		<h1 class="md-toolbar-tools">
+			<a ng-href="#/fieldEntry" layout="row" flex class="docs-logo"
+				layout-align="center">
+				<div class="docs-logotype" style="font-size: 0.8em; color: #fff">&lt;/&gt;XML
+					ENTRY APP&lt;/&gt;</div>
+			</a>
+		</h1>
+		</md-toolbar> </md-sidenav>
+		<h1 class="md-toolbar-tools" layout-align-gt-sm="center"
+			style="font-size: 2em; color: #fff;">&lt;/&gt;{{myAppController.title}}&lt;/&gt;</h1>
+		</md-toolbar>
+		<div layout="row" flex>
+			<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" style="min-height:550px; background-color:rgb(23,55,94)"
+				md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" >
+			<md-button ng-repeat="item in todos" ng-href="#/{{item.pages}}"  class="md-whiteframe-z2 inactiveTab" capitalize-first>
+				<h3>{{item.title}}</h3>
+			</md-button> </md-sidenav>
+			<div layout="column" flex id="content">
+				<md-content layout="column" flex class="md-padding"> 
+				<ng-view></ng-view>
+				</md-content>
+			</div>
+		</div>
+	</div>
+	<!-- Latest compiled and minified JavaScript -->
+	<script type="text/javascript" src="libraries/js/angular.js"></script>
+	<script type="text/javascript" src="libraries/js/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="libraries/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="libraries/js/xml2json.js"></script>
+	<script type="text/javascript" src="libraries/js/xeditable.js"></script>
+	<script src="libraries/js/angular-route.js"></script>
+	<script type="text/javascript"
+		src="libraries/js/angular-animate.min.js"></script>
+	<script type="text/javascript" src="libraries/js/angular-aria.min.js"></script>
+	<script type="text/javascript"
+		src="libraries/js/angular-material.min.js"></script>
+		<script type="text/javascript"
+		src="libraries/js/mfb-directive.js"></script>
+	<script type="text/javascript" src="js/myApp.js"></script>
+
+
+</body>
+    
+</html>

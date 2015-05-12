@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>XML Entry Creator</title>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="libraries/js/json3.min.js"></script>
+	<script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+        </script>
+<![endif]-->
+<script type="text/javascript" src="libraries/js/angular.js"></script>
+
+<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="libraries/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="libraries/js/jquery-1.11.2.js"></script>
+<script src="libraries/js/bootstrap.min.js"></script>
+<script src="libraries/js/xml2json.js"></script>
+<script type="text/javascript" src="js/myApp.js"></script>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body id="ng-app" ng-app="XmlentryCreator" class="container">
+	<div ng-controller="MyAppController">
+		<div onelineentry></div>		
+		<div allxmlentry></div>	
+	</div>
+</body>
+</html>
