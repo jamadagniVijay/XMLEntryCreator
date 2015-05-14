@@ -60,6 +60,10 @@ a:LINK,a:ACTIVE,a:HOVER {
 	.md-content-extra {
 		padding: 50px 100px 0px 100px;
 	}
+	.md-content-table-entry-extra
+	{
+		padding: 50px 50px 0px 50px;
+	}
 }
 
 .label-default-extra

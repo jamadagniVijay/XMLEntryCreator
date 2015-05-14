@@ -5,11 +5,22 @@
 <title>{{title}}</title>
 </head>
 <body>
-	<md-content class="md-content-extra table-responsive">
-	<table class="table-bordered entrySelector" >
-		<tr ng-repeat="n in [] | range:10" ng-click="$parent.log('clicked '+($index+1)+' '+$scope.colIndex)" >
-			<td ng-repeat="m in [] | range:20" ng-model="colIndex" ng-click="$parent.$scope.colIndex = $index+1;"> &nbsp;</td>
-		</tr>
+	<md-content class="md-content-table-entry-extra ">
+	<table class="table-bordered entrySelector">
+		<thead>
+			<td/>
+			<td  ng-repeat="m in [] | range:20">
+				{{$index+1}}
+			</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="n in [] | range:10"
+				ng-click="$parent.log('clicked '+($index+1)+' '+$scope.colIndex)">
+				<td>{{$index+1}}</td>
+				<td ng-repeat="m in [] | range:20" ng-model="colIndex"
+					ng-click="$parent.$scope.colIndex = $index+1;">&nbsp;</td>
+			</tr>
+		</tbody>
 	</table>
 	</md-content>
 	<md-content class="md-content-extra"> <allxmldata></allxmldata>
