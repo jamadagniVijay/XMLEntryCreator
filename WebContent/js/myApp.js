@@ -18,7 +18,15 @@ xmlEntryApp.filter('textOrNumber', function ($filter) {
         };
     };
 });
-xmlEntryApp.controller('MyAppController', ['$scope', '$mdSidenav',function($scope, $mdSidenav) {
+xmlEntryApp.filter('range', function() {
+	  return function(input, total) {
+		    total = parseInt(total);
+		    for (var i=0; i<total; i++)
+		      input.push(i);
+		    return input;
+		  };
+		});
+xmlEntryApp.controller('MyAppController', ['$scope', '$mdSidenav','$log',function($scope, $mdSidenav, $log) {
 	$scope.user = {
 			name: 'awesome user'
 	}; 
@@ -44,7 +52,7 @@ xmlEntryApp.controller('MyAppController', ['$scope', '$mdSidenav',function($scop
 	}
 }]);	
 
-xmlEntryApp.config(['$routeProvider',function($routeProvider){
+xmlEntryApp.config(['$routeProvider','$logProvider',function($routeProvider,$logProvider){
 	$routeProvider.
 	when('/fieldEntry', {
 		templateUrl: 'partials/fieldEntry.html',
@@ -57,6 +65,7 @@ xmlEntryApp.config(['$routeProvider',function($routeProvider){
 	otherwise({
 		redirectTo: '/fieldEntry'
 	});
+	$logProvider.debugEnabled(true);
 }]);
 xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav',function($scope, $mdSidenav) {
 	$scope.myAppController.title="Field Entry";
@@ -111,7 +120,14 @@ xmlEntryApp.directive('slideToggle', function() {
 	  };  
 	});
 
-xmlEntryApp.controller('TableEntryController', ['$scope', '$mdSidenav',function($scope, $mdSidenav) {
+xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSidenav','$log',function($scope, $rootScope,$mdSidenav, $log) {
 	$scope.myAppController.title="Table Entry";
 	$scope.boolActiveTab = "true";
+	$rootScope.log = function(variable) {
+	    console.log(variable);
+	};
+	$rootScope.alert = function(text) {
+	    alert(text);
+	};
+	$log.info('thu');
 }]);

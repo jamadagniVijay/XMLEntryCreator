@@ -94,3 +94,7 @@ md-toolbar.demo-toolbar {
 .show-hide.ng-hide {
   opacity:0.5;
 }
+.entrySelector tr td
+{
+	padding:5px 10px;
+}

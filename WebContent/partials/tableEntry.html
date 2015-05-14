@@ -5,8 +5,14 @@
 <title>{{title}}</title>
 </head>
 <body>
-	<md-content class="md-content-extra" >
-    	<allxmldata></allxmldata>
-    </md-content>
+	<md-content class="md-content-extra table-responsive">
+	<table class="table-bordered entrySelector" >
+		<tr ng-repeat="n in [] | range:10" ng-click="$parent.log('clicked '+($index+1)+' '+$scope.colIndex)" >
+			<td ng-repeat="m in [] | range:20" ng-model="colIndex" ng-click="$parent.$scope.colIndex = $index+1;"> &nbsp;</td>
+		</tr>
+	</table>
+	</md-content>
+	<md-content class="md-content-extra"> <allxmldata></allxmldata>
+	</md-content>
 </body>
 </html>
