@@ -8,7 +8,7 @@
 	 <md-content layout-padding layout="row" layout-sm="column"  class="md-content-extra">
 	    <md-input-container>
 	      <label style="font-weight: none;">ExFORM_Field{{counter.i}}</label>
-	      <input ng-model="fieldSample" required>
+	      <input ng-model="fieldSample" required ng-enter-key="addFieldEntry()">
 			<p ng-hide="fieldSample.length" class="label label-danger">
 			  Enter sample value for <span class="badge">ExFORM_Field{{counter.i}}</span>
 			</p>
