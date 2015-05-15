@@ -6,26 +6,26 @@ xmlEntryApp.run(function(editableOptions) {
 xmlEntryApp.directive("allxmldata",function(){
 	return {
 		restrict: "E",
-	    templateUrl: 'partials/fullxml.html'
-	  };
+		templateUrl: 'partials/fullxml.html'
+	};
 });
 xmlEntryApp.filter('textOrNumber', function ($filter) {
-    return function (input, fractionSize) {
-        if (isNaN(input)) {
-            return input;
-        } else {
-            return $filter('number')(input, fractionSize);
-        };
-    };
+	return function (input, fractionSize) {
+		if (isNaN(input)) {
+			return input;
+		} else {
+			return $filter('number')(input, fractionSize);
+		};
+	};
 });
 xmlEntryApp.filter('range', function() {
-	  return function(input, total) {
-		    total = parseInt(total);
-		    for (var i=0; i<total; i++)
-		      input.push(i);
-		    return input;
-		  };
-		});
+	return function(input, total) {
+		total = parseInt(total);
+		for (var i=0; i<total; i++)
+			input.push(i);
+		return input;
+	};
+});
 xmlEntryApp.controller('MyAppController', ['$scope', '$mdSidenav','$log',function($scope, $mdSidenav, $log) {
 	$scope.user = {
 			name: 'awesome user'
@@ -33,7 +33,7 @@ xmlEntryApp.controller('MyAppController', ['$scope', '$mdSidenav','$log',functio
 	$scope.toggleSidenav = function(menuId) {
 		$mdSidenav(menuId).toggle();
 	};
-	
+
 	init();
 	function init()
 	{
@@ -71,7 +71,7 @@ xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav',function(
 	$scope.myAppController.title="Field Entry";
 	$scope.counter = {};
 	$scope.counter.i = 1;
-	
+
 	$scope.addFieldEntry = function()
 	{	
 		var filedEntry=new function() {
@@ -85,68 +85,72 @@ xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav',function(
 	$scope.removeFileldEntry = function(fieldName)
 	{
 		$.each($scope.filedEntries, function(index, result) {
-		      if(result['fieldName'] == fieldName) {
-		          //Remove from array
-		    	  $scope.filedEntries.splice(index, 1);
-		      }    
-		   });
+			if(result['fieldName'] == fieldName) {
+				//Remove from array
+				$scope.filedEntries.splice(index, 1);
+			}    
+		});
 		if($scope.counter.i == 0)
-			{
-				$scope.counter.i = 1;
-			}
+		{
+			$scope.counter.i = 1;
+		}
 		$scope.counter.i = $scope.filedEntries.length+1;
 	};
-		
+
 }]);
 
 xmlEntryApp.directive('slideToggle', function() {  
-	  return {
-	    restrict: 'A',      
-	    scope:{
-	      isOpen: "=slideToggle" // 'data-slide-toggle' in our html
-	    },  
-	    link: function(scope, element, attr) {
-	      var slideDuration = parseInt(attr.slideToggleDuration, 10) || 200;      
-	      
-	      // Watch for when the value bound to isOpen changes
-	      // When it changes trigger a slideToggle
-	      scope.$watch('isOpen', function(newIsOpenVal, oldIsOpenVal){
-	        if(newIsOpenVal !== oldIsOpenVal){ 
-	          element.stop().slideToggle(slideDuration);
-	        }
-	      });
-	      
-	    }
-	  };  
-	});
+	return {
+		restrict: 'A',      
+		scope:{
+			isOpen: "=slideToggle" // 'data-slide-toggle' in our html
+		},  
+		link: function(scope, element, attr) {
+			var slideDuration = parseInt(attr.slideToggleDuration, 10) || 200;      
+
+			// Watch for when the value bound to isOpen changes
+			// When it changes trigger a slideToggle
+			scope.$watch('isOpen', function(newIsOpenVal, oldIsOpenVal){
+				if(newIsOpenVal !== oldIsOpenVal){ 
+					element.stop().slideToggle(slideDuration);
+				}
+			});
+
+		}
+	};  
+});
 
 xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSidenav','$log',function($scope, $rootScope,$mdSidenav, $log) {
 	$scope.myAppController.title="Table Entry";
 	$scope.boolActiveTab = "true";
+	
+	
+	
+	
 	$rootScope.log = function(variable) {
-	    console.log(variable);
+		console.log(variable);
 	};
 	$rootScope.alert = function(text) {
-	    alert(text);
+		alert(text);
 	};
 	$log.info('thu');
 }]);
 
 xmlEntryApp.directive('ngEnterKey', function() {
-    return function(scope, element, attrs) {
+	return function(scope, element, attrs) {
 
-        element.bind("keydown keypress", function(event) {
-            var keyCode = event.which || event.keyCode;
+		element.bind("keydown keypress", function(event) {
+			var keyCode = event.which || event.keyCode;
 
-            // If enter key is pressed
-            if (keyCode === 13) {
-                scope.$apply(function() {
-                        // Evaluate the expression
-                    scope.$eval(attrs.ngEnterKey);
-                });
+			// If enter key is pressed
+			if (keyCode === 13) {
+				scope.$apply(function() {
+					// Evaluate the expression
+					scope.$eval(attrs.ngEnterKey);
+				});
 
-                event.preventDefault();
-            }
-        });
-    };
+				event.preventDefault();
+			}
+		});
+	};
 });

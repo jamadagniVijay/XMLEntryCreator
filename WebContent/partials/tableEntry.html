@@ -14,11 +14,9 @@
 			</td>
 		</thead>
 		<tbody>
-			<tr ng-repeat="n in [] | range:10"
-				ng-click="$parent.alert('clicked '+($index+1)+' '+$scope.colIndex)">
+			<tr ng-repeat="n in [] | range:10" ng-class="{selected: $index == $scope.rowIndex-1 }" ng-model = "rowIndex" ng-click="$parent.$scope.rowIndex = $index+1"> 
 				<td>{{$index+1}}</td>
-				<td ng-repeat="m in [] | range:20" ng-model="colIndex"
-					ng-click="$parent.$scope.colIndex = $index+1;">&nbsp;</td>
+				<td ng-repeat="m in [] | range:20" ng-model="colIndex" ng-click="$parent.$scope.colIndex = $index+1;"  ng-class="{selected: $index == $scope.colIndex-1}" }>&nbsp;</td>
 			</tr>
 		</tbody>
 	</table>

@@ -102,3 +102,11 @@ md-toolbar.demo-toolbar {
 {
 	padding:5px 10px;
 }
+.selected
+{
+	background-color: #999;
+}
+.unselected
+{
+	background-color: #fff;
+}
