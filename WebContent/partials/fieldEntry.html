@@ -24,7 +24,7 @@
     	<div class="list-group list-group-extension">
 	    	<div class="list-group-item list-group-item-extension list-group-item-danger ">
 	    		&lt;ExFORM_Data&gt;<br/>
-	    			<div ng-repeat="fieldEntry in filedEntries">&nbsp;&#09;&lt;{{fieldEntry.fieldName}}&gt;{{fieldEntry.sampleValue | textOrNumber}}&lt;/{{fieldEntry.fieldName }}&gt;&nbsp;&nbsp;<span class="label label-danger" ng-click="removeFileldEntry(fieldEntry.fieldName)" title="remove this tag">-</span></div>
+	    			<div ng-repeat="fieldEntry in filedEntries"><span class="label label-danger" ng-click="removeFileldEntry(fieldEntry.fieldName)" title="remove this tag">-</span>&nbsp;&#09;&lt;{{fieldEntry.fieldName}}&gt;{{fieldEntry.sampleValue | textOrNumber}}&lt;/{{fieldEntry.fieldName }}&gt;</div>
 	    		&lt;/ExFORM_Data&gt;
 	    	</div>
 	    </div>
