@@ -6926,7 +6926,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
     return compile;
 
-    //================================
+    //====
 
     function compile($compileNodes, transcludeFn, maxPriority, ignoreDirective,
                         previousCompileContext) {
