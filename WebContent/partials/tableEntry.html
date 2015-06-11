@@ -6,22 +6,44 @@
 </head>
 <body>
 	<md-content class="md-content-table-entry-extra ">
-	<table class="table-bordered entrySelector">
-		<thead>
-			<td/>
-			<td  ng-repeat="m in [] | range:20">
-				{{$index+1}}
-			</td>
-		</thead>
-		<tbody>
-			<tr ng-repeat="n in [] | range:10" ng-class="{selected: $index == $scope.rowIndex-1 }" ng-model = "rowIndex" ng-click="$parent.$scope.rowIndex = $index+1"> 
-				<td>{{$index+1}}</td>
-				<td ng-repeat="m in [] | range:20" ng-model="colIndex" ng-click="$parent.$scope.colIndex = $index+1;"  ng-class="{selected: $index == $scope.colIndex-1}" }>&nbsp;</td>
-			</tr>
-		</tbody>
-	</table>
+		<div style="display:{{isDisabled}}">
+			<md-select ng-model="tableTinsert" placeholder="Select a table to be inserted" >
+			  <md-option ng-value="table" ng-repeat="table in tableArray track by $index">{{ table }}</md-option>
+			</md-select>
+	  	</div>
+	  	<div style="display:{{isButtonHidden}}">
+	  		<md-button class="md-fab md-warn md-raised md-hue-2" aria-label="Add Entry" ng-click="addFieldEntry()">
+		     <strong>+</strong>
+		     <md-tooltip>Add {{tableTinsert}} table XML</md-tooltip>
+		    </md-button>
+	  	</div>
+		<br/><br/><!-- break btw table selection and row, column selection--> 
+		
+		<table class="table-bordered entrySelector" ng-hide="!tableTinsert.length" >
+			<thead>
+				<td/>
+				<td  ng-repeat="m in [] | range:20">
+					{{$index+1}}
+				</td>
+			</thead>
+			<tbody ng-click="showToast($scope.rowIndex, $scope.colIndex)">
+				<tr ng-repeat="n in [] | range:10 track by $index" ng-click="assignIndex(($index+1),'row');"> 
+					<td>{{$index+1}}</td>
+					<td ng-repeat="m in [] | range:20 track by $index" ng-click="assignIndex(($index+1),'col');" ng-class="{selected : boolSelected(n,m)}">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<br/><!-- break btw table selection and row, column selection--> 
+		<div style="display:{{isButtonHidden}}">
+			<md-button class="md-fab md-warn md-raised md-hue-2" aria-label="Clear All" ng-click="clearAll()">
+				<strong>X</strong>
+				<md-tooltip>Clear {{tableTinsert}} selection</md-tooltip>
+			</md-button>
+		</div>
 	</md-content>
-	<md-content class="md-content-extra"> <allxmldata></allxmldata>
+	<md-content class="md-content-extra"> 
+		<allxmldata></allxmldata>
 	</md-content>
+	
 </body>
 </html>

@@ -67,7 +67,7 @@ xmlEntryApp.config(['$routeProvider','$logProvider',function($routeProvider,$log
 	});
 	$logProvider.debugEnabled(true);
 }]);
-xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav',function($scope, $mdSidenav) {
+xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav','$mdToast',function($scope, $mdSidenav, $mdToast) {
 	$scope.myAppController.title="Field Entry";
 	$scope.counter = {};
 	$scope.counter.i = 1;
@@ -80,6 +80,13 @@ xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav',function(
 		};		
 		$scope.filedEntries.push(filedEntry);
 		$scope.counter.i = $scope.counter.i+1;
+		$mdToast.hide();
+		$mdToast.show({
+          position: "top left",
+          hideDelay : 4000,
+          template: "<md-toast>Added field"+fieldName+"</md-toast>"
+          
+        });
 		console.log($scope.counter.i);
 	};
 	$scope.removeFileldEntry = function(fieldName)
@@ -120,22 +127,90 @@ xmlEntryApp.directive('slideToggle', function() {
 	};  
 });
 
-xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSidenav','$log',function($scope, $rootScope,$mdSidenav, $log) {
+xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSidenav','$log','$mdToast',function($scope, $rootScope,$mdSidenav, $log,$mdToast) {
 	$scope.myAppController.title="Table Entry";
 	$scope.boolActiveTab = "true";
-	
-	
-	
-	
+	$scope.isButtonHidden = 'none'
+
 	$rootScope.log = function(variable) {
 		console.log(variable);
 	};
 	$rootScope.alert = function(text) {
 		alert(text);
 	};
-	$log.info('thu');
-}]);
 
+	$scope.assignIndex = function(index, rowRCol) {
+		$scope.isDisabled = 'none';
+		$scope.isButtonHidden = 'block';
+		switch(rowRCol) {
+		case 'row':
+		{ 
+			$scope.rowIndex = index;
+			break;
+		}
+		case 'col':
+		{ 
+			$scope.colIndex = index;
+			break;
+		}
+		default:
+		{
+			$scope.rowIndex = -1;
+			$scope.colIndex = -1;
+			break;
+		}
+		
+		}
+	};
+	$scope.boolSelected = function(rowIndex,colIndex)
+	{
+		if(rowIndex<$scope.rowIndex && colIndex< $scope.colIndex)
+			{
+				return true;
+			}
+		else
+			return false;
+	};
+	$scope.$watchGroup(['rowIndex', 'colIndex'], function(newValues, oldValues) {
+		
+		if($scope.rowIndex >-1)
+		{
+			$mdToast.hide();
+			$mdToast.show({
+	          position: "top left",
+	          hideDelay : 4000,
+	          template: "<md-toast>Selected "+ $scope.rowIndex+" rows and "+$scope.colIndex+" columns for <strong>&nbsp;"+$scope.tableTinsert+'</strong></md-toast>'
+	          
+	        });
+		}
+	});
+	
+	$scope.clearAll = function()
+	{
+		$scope.rowIndex =-1;
+		$scope.colIndex =-1;
+		
+		$scope.isDisabled = 'block';
+		$scope.isButtonHidden = 'none';
+		
+		$mdToast.hide();
+		$mdToast.show({
+	          position: "top left",
+	          hideDelay : 4000,
+	          template: "<md-toast>add rows and columns again</md-toast>"
+	        });
+	}
+	$scope.tableArray = ['Table1 ','Table2', 'Table3', 'Table4', 'Table5', 'Table6', 'Table7'];
+}]);
+xmlEntryApp.filter('startFrom', function() {
+	return function(input, start) {
+		if(input) {
+			start = +start; //parse to int
+			return input.slice(start);
+		}
+		return [];
+	}
+});
 xmlEntryApp.directive('ngEnterKey', function() {
 	return function(scope, element, attrs) {
 

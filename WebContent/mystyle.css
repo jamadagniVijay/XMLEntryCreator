@@ -62,7 +62,7 @@ a:LINK,a:ACTIVE,a:HOVER {
 	}
 	.md-content-table-entry-extra
 	{
-		padding: 50px 50px 0px 50px;
+		padding: 10px 50px 0px 50px;
 	}
 }
 
@@ -109,4 +109,8 @@ md-toolbar.demo-toolbar {
 .unselected
 {
 	background-color: #fff;
+}
+.md-tooltip
+{
+	font-size: 0.7em;
 }
