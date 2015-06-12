@@ -1,4 +1,4 @@
-xmlEntryApp=angular.module('XmlentryCreator', ['xeditable','ngRoute','ngMaterial']);
+xmlEntryApp=angular.module('XmlentryCreator', ['xeditable','ngRoute','ngMaterial','ngAnimate']);
 
 xmlEntryApp.run(function(editableOptions) {
 	editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -70,23 +70,20 @@ xmlEntryApp.config(['$routeProvider','$logProvider',function($routeProvider,$log
 xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav','$mdToast',function($scope, $mdSidenav, $mdToast) {
 	$scope.myAppController.title="Field Entry";
 	$scope.counter = {};
-	$scope.counter.i = 1;
+	$scope.counter.i = ($scope.filedEntries.length == 0) ? 1:  (parseInt($scope.filedEntries[$scope.filedEntries.length-1].fieldName.substring(12)))+1;
 
 	$scope.addFieldEntry = function()
 	{	
+		if($scope.filedEntries.length==0)
+			{
+				$scope.counter.i = 1;
+			}
 		var filedEntry=new function() {
 			this.fieldName="ExFORM_Field"+$scope.counter.i;
 			this.sampleValue=  $scope.fieldSample;
 		};		
 		$scope.filedEntries.push(filedEntry);
 		$scope.counter.i = $scope.counter.i+1;
-		$mdToast.hide();
-		$mdToast.show({
-          position: "top left",
-          hideDelay : 4000,
-          template: "<md-toast>Added field"+fieldName+"</md-toast>"
-          
-        });
 		console.log($scope.counter.i);
 	};
 	$scope.removeFileldEntry = function(fieldName)
@@ -97,11 +94,8 @@ xmlEntryApp.controller('FieldEntryController', ['$scope', '$mdSidenav','$mdToast
 				$scope.filedEntries.splice(index, 1);
 			}    
 		});
-		if($scope.counter.i == 0)
-		{
-			$scope.counter.i = 1;
-		}
-		$scope.counter.i = $scope.filedEntries.length+1;
+
+		$scope.counter.i = $scope.filedEntries.length == 0? 1:  (parseInt($scope.filedEntries[$scope.filedEntries.length-1].fieldName.substring(12)))+1;
 	};
 
 }]);
@@ -139,6 +133,7 @@ xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSiden
 		alert(text);
 	};
 
+	
 	$scope.assignIndex = function(index, rowRCol) {
 		$scope.isDisabled = 'none';
 		$scope.isButtonHidden = 'block';
@@ -171,7 +166,7 @@ xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSiden
 		else
 			return false;
 	};
-	$scope.$watchGroup(['rowIndex', 'colIndex'], function(newValues, oldValues) {
+	$scope.$watchGroup(['rowIndex'], function(newValues, oldValues) {
 		
 		if($scope.rowIndex >-1)
 		{
@@ -179,7 +174,7 @@ xmlEntryApp.controller('TableEntryController', ['$scope','$rootScope', '$mdSiden
 			$mdToast.show({
 	          position: "top left",
 	          hideDelay : 4000,
-	          template: "<md-toast>Selected "+ $scope.rowIndex+" rows and "+$scope.colIndex+" columns for <strong>&nbsp;"+$scope.tableTinsert+'</strong></md-toast>'
+	          template: "<md-toast>Selected <strong>&nbsp; "+ $scope.rowIndex+" &nbsp;</strong> rows and <strong> &nbsp;"+$scope.colIndex+"&nbsp; </strong> columns for <strong>&nbsp;"+$scope.tableTinsert+'</strong></md-toast>'
 	          
 	        });
 		}

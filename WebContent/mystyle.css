@@ -58,7 +58,7 @@ a:LINK,a:ACTIVE,a:HOVER {
 }
 @media ( min-width : 600px) {
 	.md-content-extra {
-		padding: 50px 100px 0px 100px;
+		padding: 25px 100px 0px 100px;
 	}
 	.md-content-table-entry-extra
 	{
